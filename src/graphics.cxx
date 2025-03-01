@@ -77,7 +77,7 @@ auto my::Graphics::addModel(Model& model) -> void {
   glBindBuffer(GL_ARRAY_BUFFER, positionBuffer);
   glVertexAttribPointer(
     _positionLocation,
-    static_cast<GLint>(sizeof(float)*model.vertices.size()),
+    static_cast<GLint>(model.vertices.size())/3,
     GL_FLOAT,
     false, // normalized
     0, // stride
@@ -88,7 +88,7 @@ auto my::Graphics::addModel(Model& model) -> void {
   glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
   glVertexAttribPointer(
     _colorLocation,
-    static_cast<GLint>(sizeof(float)*model.vertexColors.size()),
+    static_cast<GLint>(model.vertexColors.size())/3,
     GL_FLOAT,
     false, // normalized,
     0, // stride
