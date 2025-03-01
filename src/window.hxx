@@ -11,6 +11,9 @@ public:
   Window();
   ~Window();
   auto update() -> bool;
+  auto postRender() -> void;
+  auto getHandle() const -> const SDL_Window*;
+  auto getHandle() -> SDL_Window*;
 
 private:
   SDL_Window* _window{nullptr};

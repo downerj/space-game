@@ -62,7 +62,7 @@ ${EXE_PATH}: ${OBJECTS}
 	${CXX} -o $@ $^ ${LIBRARIES}
 
 ${OBJ_DIR}/%.o: ${SRC_DIR}/%.cxx
-	${CXX} -c -o $@ $< ${GEN_DEPENDS} ${STANDARD_CXX} ${WARNINGS} ${DEBUG} ${OPTIMIZE}
+	${CXX} -c -o $@ $< ${GEN_DEPENDS} ${INCLUDES} ${STANDARD_CXX} ${WARNINGS} ${DEBUG} ${OPTIMIZE}
 
 clean:
 	${RM} -v ${EXE_PATH} ${OBJ_DIR}/*.o
