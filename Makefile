@@ -35,8 +35,8 @@ GEN_DEPENDS = -MMD
 
 INCLUDE_PREFIX = include
 INCLUDES = -I${INCLUDE_PREFIX}
-LIB_GLFW = -lglfw
-LIBRARIES = ${LIB_GLFW}
+LIB_SDL = $$(pkg-config --cflags --libs sdl2)
+LIBRARIES = ${LIB_SDL}
 
 #
 # Recipes.
