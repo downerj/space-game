@@ -27,7 +27,8 @@ public:
   auto getSize() -> Dimensions&;
 
 private:
-  SDL_Window* _window{nullptr};
+  SDL_Window* _window;
+  SDL_GLContext _context;
   SDL_Event _event{};
   Dimensions _size{};
 
