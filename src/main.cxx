@@ -1,5 +1,8 @@
 #include <iostream>
 
+#include "game.hxx"
+
 auto main(int, char**) -> int {
-  std::cout << "Hello, there!\n";
+  Game game{}; (void)game;
+  std::cout << "Game initialized!\n";
 }
