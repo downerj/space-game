@@ -7,6 +7,7 @@
 #include <SDL2/SDL_error.h>
 
 #include "debug.hxx"
+#include "window.hxx"
 
 my::Graphics::Graphics(SDL_Window* window)
 : _context{SDL_GL_CreateContext(window)} {
@@ -30,6 +31,10 @@ my::Graphics::Graphics(SDL_Window* window)
 
 my::Graphics::~Graphics() {
   gladLoaderUnloadGL();
+}
+
+auto my::Graphics::resize(const my::Dimensions& dimensions) -> void {
+  glViewport(0, 0, dimensions.width, dimensions.height);
 }
 
 auto my::Graphics::render() const -> void {

@@ -13,6 +13,7 @@ auto main(int, char**) -> int {
     my::Game game{}; (void)game;
 
     while (window.update()) {
+      graphics.resize(window.getSize());
       graphics.render();
       window.postRender();
     }

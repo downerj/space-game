@@ -30,12 +30,14 @@ my::Window::Window() {
   );
   _window = SDL_CreateWindow(
     title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-    initialWidth, initialHeight, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN
+    initialWidth, initialHeight,
+    SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE
   );
   if (!_window) {
     LOG_ERROR("Failed to create SDL window\n");
     throw std::runtime_error{"Failed to create window"};
   }
+  updateSize();
   SDL_StartTextInput();
 }
 
@@ -49,8 +51,16 @@ my::Window::~Window() {
 
 auto my::Window::update() -> bool {
   while (SDL_PollEvent(&_event) != 0) {
-    if (_event.type == SDL_QUIT) {
-      return false;
+    switch (_event.type) {
+      case SDL_QUIT:
+        return false;
+      case SDL_WINDOWEVENT:
+        if (_event.window.event == SDL_WINDOWEVENT_SIZE_CHANGED
+            || _event.window.event == SDL_WINDOWEVENT_RESIZED) {
+          LOG("Window was resized!\n");
+          updateSize();
+        }
+        break;
     }
   }
   return true;
@@ -66,4 +76,16 @@ auto my::Window::getHandle() const -> const SDL_Window* {
 
 auto my::Window::getHandle() -> SDL_Window* {
   return _window;
+}
+
+auto my::Window::getSize() const -> const Dimensions& {
+  return _size;
+}
+
+auto my::Window::getSize() -> Dimensions& {
+  return _size;
+}
+
+auto my::Window::updateSize() -> void {
+  SDL_GetWindowSize(_window, &_size.width, &_size.height);
 }
