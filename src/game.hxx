@@ -2,6 +2,7 @@
 #define GAME_HXX
 
 #include "camera.hxx"
+#include "player.hxx"
 
 namespace my {
 
@@ -10,6 +11,7 @@ public:
 
 private:
   Camera _camera{};
+  Player _player{};
 };
 
 } // namespace my
